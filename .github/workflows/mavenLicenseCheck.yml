@@ -269,7 +269,7 @@ jobs:
         script: |
           const fs = require('fs');
 
-          const comment: string = (process.env.COMMENT as string);
+          var comment = (process.env.COMMENT as string);
           fs.mkdirSync('./pr-comment', { recursive: true });          
           fs.writeFileSync('./pr-comment/pr.txt', context.issue.number);
           fs.writeFileSync('./pr-comment/comment.txt', comment);
