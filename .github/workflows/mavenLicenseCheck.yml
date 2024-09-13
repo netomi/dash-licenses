@@ -263,12 +263,11 @@ jobs:
     - name: Store PR comment and PR number
       if: always()
       env:
-        PR: ${{github.event.issue.number}}
-        COMMENT: ${{steps.process-results.outputs.result}}
+        PR: ${{github.event.issue.number || github.event.pull_request.number}}
       run: |
         mkdir -p ./pr-comment
         echo ${PR} > ./pr-comment/pr.txt
-        echo ${COMMENT} > ./pr-comment/comment.txt
+        echo "${{steps.process-results.outputs.result}}" > ./pr-comment/comment.txt
 
     - uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874 # v4.4.0
       if: always()
