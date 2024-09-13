@@ -1,4 +1,4 @@
-name: Add license check comment for PR coming from forks
+name: Add license check comment for PRs coming from a fork
 
 on:
   workflow_call:
@@ -9,9 +9,13 @@ jobs:
     permissions:
       pull-requests: write
     if: |
-      github.event.workflow_run.event == 'pull_request' &&
-      github.event.workflow_run.head_repository.full_name == github.repository
+      github.event.workflow_run.event == 'pull_request'
+    # github.event.workflow_run.head_repository.full_name == github.repository
     steps:
+      - run: |
+          echo ${{ github.repository }}
+          echo ${{ toJson(github.event.workflow_run.head_repository) }}
+
       - name: 'Download artifact'
         uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
         with:
