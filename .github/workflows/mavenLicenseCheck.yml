@@ -269,8 +269,17 @@ jobs:
             
           fs.mkdirSync('./pr-comment', { recursive: true });
             
-          fs.writeFileSync('./pr-comment/pr.txt', `${{github.event.issue.number}}`);
-          fs.writeFileSync('./pr-comment/comment.txt', `${{steps.process-results.outputs.result}}`);
+          var pr_number = ``;
+          
+          if ('${{github.event.issue}}' != '') {
+            pr_number = `${{github.event.issue.number}}`;
+          } else {
+            pr_number = `${{github.event.pull_request.number}}`;
+          }
+          var comment = `${{steps.process-results.outputs.result}}`;
+          
+          fs.writeFileSync('./pr-comment/pr.txt', pr_number);
+          fs.writeFileSync('./pr-comment/comment.txt', comment);
 
     - uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874 # v4.4.0
       if: always()
