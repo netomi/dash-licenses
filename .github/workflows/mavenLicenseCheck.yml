@@ -263,17 +263,15 @@ jobs:
     - name: Store PR comment and PR number
       uses: actions/github-script@v7
       if: always()
-      env:
-        COMMENT: ${{steps.process-results.outputs.result}}
       with:
         script: |
           const fs = require('fs');
-          const { COMMENT } = process.env;
-            
-          fs.mkdirSync('./pr-comment', { recursive: true });
-            
+
+          const comment = '${{steps.process-results.outputs.result}}';
+
+          fs.mkdirSync('./pr-comment', { recursive: true });          
           fs.writeFileSync('./pr-comment/pr.txt', context.issue.number);
-          fs.writeFileSync('./pr-comment/comment.txt', ${COMMENT});
+          fs.writeFileSync('./pr-comment/comment.txt', comment);
 
     - uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874 # v4.4.0
       if: always()
