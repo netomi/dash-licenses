@@ -272,14 +272,7 @@ jobs:
             
           fs.mkdirSync('./pr-comment', { recursive: true });
             
-          var pr_number = '';
-          if (context.payload.issue != '') {
-            pr_number = context.payload.issue.number;
-          } else {
-            pr_number = context.payload.pull_request.number;
-          }
-                    
-          fs.writeFileSync('./pr-comment/pr.txt', pr_number);
+          fs.writeFileSync('./pr-comment/pr.txt', context.issue.number);
           fs.writeFileSync('./pr-comment/comment.txt', ${COMMENT});
 
     - uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874 # v4.4.0
