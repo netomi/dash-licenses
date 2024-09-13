@@ -202,7 +202,8 @@ jobs:
               let notVettedDependencies = 0
               for (const line of lines) {
                 if (line.includes('restricted')) {
-                  commentBody += `| ${line.split(", ").join(" | ")} |\n`
+                  depLine = `| ${line.split(", ").join(" | ")} |\n`
+                  commentBody += depLine.replace(/#([0-9]+)/gm, "https://gitlab.eclipse.org/eclipsefdn/emo-team/iplab/-/issues/\\$1")
                   notVettedDependencies++
                 }
               }
