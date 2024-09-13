@@ -260,13 +260,30 @@ jobs:
         message: |
           ${{steps.process-results.outputs.result}}
 
+<<<<<<< Updated upstream
     - uses: actions/upload-artifact@v4
+=======
+    - name: Store PR comment and PR number
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const fs = require('fs');
+            
+          fs.mkdirSync('./pr-comment', { recursive: true });
+            
+          fs.writeFileSync('./pr-comment/pr-number.txt', `${{ github.event.number }}`);
+          fs.writeFileSync('./pr-comment/comment.txt', `${{steps.process-results.outputs.result}}`);
+
+    - uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874 # v4.4.0
+>>>>>>> Stashed changes
       if: always()
       with:
         name: '${{ inputs.projectId }}-license-vetting-summary'
         path: |
           target/dash/review-summary
           target/dash/summary
+          pr-comment/pr.txt
+          pr-comment/comment.txt
 
   rerun-check:
     needs: check-request
