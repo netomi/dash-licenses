@@ -269,14 +269,14 @@ jobs:
             
           fs.mkdirSync('./pr-comment', { recursive: true });
             
-          var pr_number = ``;
+          var pr_number = '';
           
           if ('${{github.event.issue}}' != '') {
-            pr_number = `${{github.event.issue.number}}`;
+            pr_number = '${{github.event.issue.number}}';
           } else {
-            pr_number = `${{github.event.pull_request.number}}`;
+            pr_number = '${{github.event.pull_request.number}}';
           }
-          var comment = `${{steps.process-results.outputs.result}}`;
+          var comment = '${{steps.process-results.outputs.result}}';
           
           fs.writeFileSync('./pr-comment/pr.txt', pr_number);
           fs.writeFileSync('./pr-comment/comment.txt', comment);
