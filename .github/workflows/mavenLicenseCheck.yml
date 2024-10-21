@@ -114,7 +114,7 @@ jobs:
     env:
       request-review: ${{ needs.check-request.outputs.request-review }}
       license-check: ${{ needs.check-request.outputs.license-check }}
-      comment-header: '<!-- tag-license-comment -->'
+      comment-header: 'tag-license-comment'
     steps:
     # By default, the git-ref checked out for events triggered by comments to PRs is 'refs/heads/master'
     # and for events triggered by PR creation/updates the ref is 'refs/pull/<PR-number>/merge'.
