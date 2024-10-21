@@ -183,7 +183,7 @@ jobs:
             } else {
               // Do not comment if all licenses are vetted and no update was requested 
               core.info('All licenses are already vetted.')
-              return;
+              return "All licenses are already vetted."
             }
           } else {
             // Print dependency info 
